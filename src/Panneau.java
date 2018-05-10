@@ -6,13 +6,9 @@ import javax.swing.JPanel;
 public class Panneau extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	// Marge entre les composants
-//	private final int OFFSET = 5;
-	
 	// Initialisation des composants
 	private JPanel gene_part; // top half
 	private Browser genome_browser;
-//	private JPanel gene_info; // quarter top right
 	
 	private JPanel path_part; // bottom half
 	private Browser pathway_browser;
@@ -39,9 +35,6 @@ public class Panneau extends JPanel {
 	    genome_browser = new Browser(" Genome browser ");
 	    gene_part.add(genome_browser, BorderLayout.CENTER);
 	    
-//	    gb_bl = new BorderLayout();
-//	    genome_browser.setLayout(gb_bl);
-//	    genome_browser.setLayout(new BorderLayout());
 	    
 	    System.out.println("Test 2");
 	    
@@ -51,12 +44,14 @@ public class Panneau extends JPanel {
 	    
 	    path_part.setLayout(new BorderLayout());
 	    pathway_browser = new Browser(" Pathway browser ");
+//	    pathway_browser.Menu.setLabelID("Map ID");
 	    path_part.add(pathway_browser, BorderLayout.CENTER);
 	    
 	    // FIN AJOUT TEST
 
 	    System.out.println("Test 3");
         System.out.println("Test 4");
+        
 	    /*
 	    //====================== Pathway browser part ====================
 	    JPanel path_part = new JPanel();
@@ -75,7 +70,6 @@ public class Panneau extends JPanel {
 	    path_part.add(reaction_info, BorderLayout.EAST);
 	    */
         
-        
 	    //~ ImageIO.read(image);
         
         // Lire une image a partir d'un fichier
@@ -86,20 +80,8 @@ public class Panneau extends JPanel {
         // catch (IOException e) {
         //     e.printStackTrace();
         // }
-        
-        
-	    
-	    // definition du layout a utiliser dans le contentPane        
-	    //~ this.setLayout(new BorderLayout()); 
-	    
-	    //~ this.getContentPane().add(b_search, BorderLayout.NORTH);
-	    
-	    
-	    //~ pan.setBackground(Color.GREY);
-	    //~ this.setContentPane(pan);
+  
     }
     
-//	public void paintComponent(Graphics g) {
-//		super.paintComponent(g);
-//	}
+
 }
