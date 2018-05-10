@@ -17,7 +17,7 @@ public class Fenetre extends JFrame {
 	public Fenetre() throws IOException {
     	
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // affiche la fenetre au milieu de l'ecran
+//        setLocationRelativeTo(null); // affiche la fenetre au milieu de l'ecran
         setTitle("KEGG Browser");    // nom de la fenetre
         setSize(900, 450);           // taille de la fenetre
         setMinimumSize(new Dimension(640, 480));     // taille minimun de la fenetre

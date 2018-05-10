@@ -16,18 +16,11 @@ public class Browser extends JPanel {
 	private Menu menu;
 	
 	private JPanel browser; // quarter left
-//	private JPanel info; // quarter right
 	private JEditorPane html_viewer;
-	
-	private Information info;
 	
     public Browser(String browser_name) {
     	
 	    browser = new JPanel();
-	    
-//	    info = new JPanel();
-	    info = new Information("test", "test");
-//	    info.setPreferredSize(new Dimension(200, 100));
 	    
 	    menu = new Menu(browser_name); 
         html_viewer = new JEditorPane(); // Contenu html
@@ -36,7 +29,6 @@ public class Browser extends JPanel {
 //	    part.setLayout(gene_part_bl);
 	    setLayout(new BorderLayout());
 	    add(browser, BorderLayout.CENTER);
-	    add(info, BorderLayout.EAST);
 	    
 //	    gb_bl = new BorderLayout();
 //	    genome_browser.setLayout(gb_bl);

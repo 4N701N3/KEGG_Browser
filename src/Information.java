@@ -1,7 +1,9 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-import javax.swing.BoxLayout;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+//import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
@@ -13,26 +15,29 @@ public class Information extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
+	private final int OFFSET = 5;
+	
 	// Initialiser les composants de la partie droite de l'application
-//	private JPanel 
+		// les deux conteneurs principaux de Information
+	private JPanel info_panel;
+	private Box box;
+	
 	private Etiquette info_label;
 	private JEditorPane info_content;
-//	private JScrollPane info_sp;
 	
 	private JLabel involved_label;
 	private JList<String> involved_list;
-//	private JScrollPane involved_sp; inutile pour l'instant
 	
 	public Information(String info_name, String involved_name) {
 		
 		setPreferredSize(new Dimension(200, 100));
-		setLayout(new BorderLayout());
-		// vertical Box or not ????
 		
 		info_label = new Etiquette(info_name);
 		involved_label = new JLabel(involved_name);
+		involved_label.setAlignmentX(LEFT_ALIGNMENT);
 		
 		info_content = new JEditorPane();
+		info_content.setPreferredSize(new Dimension(200, 300));
 		
 		DefaultListModel<String> liste = new DefaultListModel<String>();
 		liste.addElement("1");
@@ -46,11 +51,20 @@ public class Information extends JPanel {
 		
 		
 		// Ajout des composants
-		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		add(info_label);
-		add(new JScrollPane(info_content));
-		add(involved_label);
-		add(new JScrollPane(involved_list));
+		info_panel = new JPanel();
+		info_panel.setLayout(new BorderLayout());
+		info_panel.setBorder(BorderFactory.createEmptyBorder(OFFSET,OFFSET,OFFSET,0));
+		info_panel.add(info_label, BorderLayout.WEST);
+		
+		setLayout(new BorderLayout());
+		add(info_panel, BorderLayout.NORTH);
+		
+		box = Box.createVerticalBox();
+		box.add(new JScrollPane(info_content));
+		box.add(involved_label);
+		box.add(new JScrollPane(involved_list));
+		
+		add(box, BorderLayout.CENTER);
 	}
 	
 	
