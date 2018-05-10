@@ -1,7 +1,9 @@
-import javax.swing.JFrame;
-
+import java.awt.Container;
 import java.awt.Dimension;
 import java.io.IOException;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /** 
  *  Classe qui permet l'afficahge graphique du logiciel.
@@ -10,8 +12,7 @@ import java.io.IOException;
 public class Fenetre extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
-    private Panneau main_container = new Panneau();
-    
+    private static Panneau main_container = new Panneau();
     
 	public Fenetre() throws IOException {
     	
@@ -21,17 +22,10 @@ public class Fenetre extends JFrame {
         setSize(900, 450);           // taille de la fenetre
         setMinimumSize(new Dimension(640, 480));     // taille minimun de la fenetre
         setResizable(true);          // redimension de la fenetre
+        setVisible(true);
         
-        add(main_container);
-        
-        //======================= Affiche la GeneMap en html =====================*/
-        //create the component 
-        //~ BrowserPane swingbox = new BrowserPane(); 
-        // add the component to your GUI  
-        //~ Container myContainer = getContentPane();
-        //~ myContainer.add(new JScrollPane(swingbox)); 
-        // display the page 
-        //~ swingbox.setPage(new URL("http://www.kegg.jp/kegg-bin/show_genomemap?ORG=eco&CHR=c&START_POS=660001"));
+        Container conteneur = getContentPane();
+        conteneur.add(main_container);
         
     }
     
@@ -39,9 +33,18 @@ public class Fenetre extends JFrame {
 	 * @param args
 	 */
     public static void main(String[] arg) throws IOException {
-        Fenetre browser = new Fenetre();
-        browser.setVisible(true);            /* affiche la fenetre */
-        
+    	SwingUtilities.invokeLater(new Runnable() {
+	    	public void run() {
+//	    		Fenetre browser = new Fenetre();
+//	    		browser.setVisible(true);            /* affiche la fenetre */
+	    		try {
+					new Fenetre();
+				} catch (IOException e) {
+					System.err.println("Error:" + e.getMessage());
+					e.printStackTrace();
+				}
+	    	}
+    	});
     }
 
     
