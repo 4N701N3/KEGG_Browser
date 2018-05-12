@@ -1,4 +1,6 @@
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -9,8 +11,11 @@ import javax.swing.JTextField;
 
 //package kegg.gui;
 
-public class Menu extends JPanel {
+public class Menu extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
+	
+	private String species; // nom de l'espece entree dans le champs species
+	private String id;      // nom de l'identifiant entree dans le champs id
 	
 	private final int OFFSET = 5;
 	
@@ -24,7 +29,7 @@ public class Menu extends JPanel {
 	private JButton menu_bouton_search;
 	
 	
-	public Menu(String browser_name) {
+	public Menu(String browser_name, String label_ID_text) {
         
         menu_box = Box.createHorizontalBox(); // left menu
         
@@ -36,7 +41,7 @@ public class Menu extends JPanel {
         //~ lab_species.setLabelFor(text_species); // Inutile ?
         
         // Valeur par defaut si non reimplemente lors de l'instanciation
-        label_ID = new JLabel("    ID "); 
+        label_ID = new JLabel("     " + label_ID_text + "  "); 
         text_ID = new JTextField(5);
         //~ lab_ID.setLabelFor(text_ID); // Inutile ?
         
@@ -47,20 +52,39 @@ public class Menu extends JPanel {
         menu_box.add(text_ID);
         
         menu_bouton_search = new JButton("Search");
+        menu_bouton_search.addActionListener(this); // Pas convaincu du tout.............
         
         setLayout(new BorderLayout());
         add(menu_box, BorderLayout.WEST);
         add(menu_bouton_search, BorderLayout.EAST);
-        setBorder(BorderFactory.createEmptyBorder(OFFSET,OFFSET,OFFSET,0)); // Marge du menu : top, left, bottom, right
+        setBorder(BorderFactory.createEmptyBorder(0,0,OFFSET,0)); // Marge du menu : top, left, bottom, right
         
     }
 	
-	/**
-	 * @param nom de l'identifiant. Ex : "Gene ID".
-	 */
-	public void setLabelID(String nom) {
-		String label_name = "       " + nom + "  ";
-		label_ID.setText(label_name);
-	}
+//	/**
+//	 * @param nom de l'identifiant. Ex : "Gene ID".
+//	 */
+//	public void setLabelID(String nom) {
+//		String label_name = "       " + nom + "  ";
+//		label_ID.setText(label_name);
+//	}
+//	
+	
+	
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == menu_bouton_search) {
+            species = text_species.getText();
+            id = text_ID.getText();
+            System.out.println("Species: " + species + " ; ID: " + id); // TEST
+        }
+    }
+    
+    public String getSpecies() {
+    	return species;
+    }
+    
+    public String getID() {
+    	return id;
+    }
 
 }

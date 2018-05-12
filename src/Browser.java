@@ -13,38 +13,26 @@ public class Browser extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	// Initialiser les composants
-	private Menu menu;
-	
-	private JPanel browser; // quarter left
 	private JEditorPane html_viewer;
 	
-    public Browser(String browser_name) {
+    public Browser() {
     	
-	    browser = new JPanel();
-	    
-	    menu = new Menu(browser_name); 
         html_viewer = new JEditorPane(); // Contenu html
+        html_viewer.setEditable(false);  // Contenu non modifiable par l'utilisateur
         
-//	    part_bl = new BorderLayout();
-//	    part.setLayout(gene_part_bl);
 	    setLayout(new BorderLayout());
-	    add(browser, BorderLayout.CENTER);
-	    
-//	    gb_bl = new BorderLayout();
-//	    genome_browser.setLayout(gb_bl);
-	    browser.setLayout(new BorderLayout());
-        browser.add(menu, BorderLayout.NORTH);
-	    browser.add(new JScrollPane(html_viewer), BorderLayout.CENTER); 
+	    add(new JScrollPane(html_viewer), BorderLayout.CENTER);
 	    
 	    try {
-			URL url = new URL("http://www.kegg.jp/kegg-bin/show_genomemap?ORG=eco&CHR=c&START_POS=660001");
+//	    	URL url = new URL("http://www.kegg.jp/kegg-bin/show_genomemap?ORG=" + menu.getSpecies() + "&ACCESSION=" + menu.getID());// "&CHR=c&START_POS=660001");
+	    	URL url = new URL("http://www.kegg.jp/kegg-bin/show_genomemap?ORG=eco&CHR=c&START_POS=660001");
 			afficherContenu(html_viewer, url);
 		} 
 	    catch (MalformedURLException e) {
 			e.printStackTrace();
 		} 
-	    catch (IOException e) {
-			e.printStackTrace();
+	    catch (IOException ioe) {
+			ioe.printStackTrace();
 		}
     }
     

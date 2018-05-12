@@ -19,8 +19,8 @@ public class Fenetre extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        setLocationRelativeTo(null); // affiche la fenetre au milieu de l'ecran
         setTitle("KEGG Browser");    // nom de la fenetre
-        setSize(900, 450);           // taille de la fenetre
-        setMinimumSize(new Dimension(640, 480));     // taille minimun de la fenetre
+        setSize(900, 480);           // taille de la fenetre
+        setMinimumSize(new Dimension(700, 480));     // taille minimun de la fenetre
         setResizable(true);          // redimension de la fenetre
         setVisible(true);
         
@@ -35,8 +35,6 @@ public class Fenetre extends JFrame {
     public static void main(String[] arg) throws IOException {
     	SwingUtilities.invokeLater(new Runnable() {
 	    	public void run() {
-//	    		Fenetre browser = new Fenetre();
-//	    		browser.setVisible(true);            /* affiche la fenetre */
 	    		try {
 					new Fenetre();
 				} catch (IOException e) {

@@ -3,7 +3,6 @@ import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-//import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
@@ -29,15 +28,16 @@ public class Information extends JPanel {
 	private JList<String> involved_list;
 	
 	public Information(String info_name, String involved_name) {
-		
-		setPreferredSize(new Dimension(200, 100));
+		setBorder(BorderFactory.createEmptyBorder(0,OFFSET,0,0)); // top, left, bottom, right
+		setMinimumSize(new Dimension(200, 200));
 		
 		info_label = new Etiquette(info_name);
 		involved_label = new JLabel(involved_name);
 		involved_label.setAlignmentX(LEFT_ALIGNMENT);
 		
 		info_content = new JEditorPane();
-		info_content.setPreferredSize(new Dimension(200, 300));
+		info_content.setEditable(false);
+		info_content.setPreferredSize(new Dimension(200, 50));
 		
 		DefaultListModel<String> liste = new DefaultListModel<String>();
 		liste.addElement("1");
@@ -45,7 +45,7 @@ public class Information extends JPanel {
 		liste.addElement("3");
 		
 		involved_list = new JList<String>(liste);
-		
+		involved_list.setPreferredSize(new Dimension(200, 50));
 //		involved_list.addListSelectionListener(null);
 //		involved_list.setPreferredSize(new Dimension ...);
 		
@@ -53,7 +53,7 @@ public class Information extends JPanel {
 		// Ajout des composants
 		info_panel = new JPanel();
 		info_panel.setLayout(new BorderLayout());
-		info_panel.setBorder(BorderFactory.createEmptyBorder(OFFSET,OFFSET,OFFSET,0));
+		info_panel.setBorder(BorderFactory.createEmptyBorder(0,0,OFFSET,0)); // top, left, bottom, right
 		info_panel.add(info_label, BorderLayout.WEST);
 		
 		setLayout(new BorderLayout());
