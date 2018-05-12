@@ -1,8 +1,12 @@
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Graphics;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import javax.swing.JEditorPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 //package kegg.gui;
 /**
@@ -12,6 +16,8 @@ public class Browser extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
+//	private static final double SCALE = 0.7;
+	
 	// Initialiser les composants
 	private JEditorPane html_viewer;
 	
@@ -19,6 +25,7 @@ public class Browser extends JPanel {
     	
         html_viewer = new JEditorPane(); // Contenu html
         html_viewer.setEditable(false);  // Contenu non modifiable par l'utilisateur
+//        html_viewer.addHyperlinkListener(new Hyperactive());
         
 	    setLayout(new BorderLayout());
 	    add(new JScrollPane(html_viewer), BorderLayout.CENTER);
@@ -40,7 +47,9 @@ public class Browser extends JPanel {
         html_viewer.setPage(url);
     }
     
-//	public void paintComponent(Graphics g) {
-//		super.paintComponent(g);
-//	}
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+//		Graphics2D g2d = (Graphics2D) g;
+//		g2d.scale(SCALE, SCALE);
+	}
 }
