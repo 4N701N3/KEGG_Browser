@@ -37,7 +37,7 @@ public class Information extends JPanel {
 		
 		info_content = new JEditorPane();
 		info_content.setEditable(false);
-		info_content.setPreferredSize(new Dimension(200, 50));
+		info_content.setPreferredSize(new Dimension(180, 50));
 		
 		DefaultListModel<String> liste = new DefaultListModel<String>();
 		liste.addElement("1");
@@ -45,7 +45,7 @@ public class Information extends JPanel {
 		liste.addElement("3");
 		
 		involved_list = new JList<String>(liste);
-		involved_list.setPreferredSize(new Dimension(200, 50));
+		involved_list.setPreferredSize(new Dimension(180, 50));
 //		involved_list.addListSelectionListener(null);
 //		involved_list.setPreferredSize(new Dimension ...);
 		

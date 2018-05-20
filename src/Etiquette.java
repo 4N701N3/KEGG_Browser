@@ -13,7 +13,7 @@ public class Etiquette extends JLabel {
 	/**
 	 * Couleur du fond de l'etiquette.
 	 */
-	private final Color COLOR = Color.CYAN;
+	private final Color COLOR = new Color(130, 200, 255) ;
 	private final int OFFSET = 5;
 	
 	/**
