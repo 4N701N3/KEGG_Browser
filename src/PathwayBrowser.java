@@ -2,10 +2,8 @@ import java.awt.BorderLayout;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -17,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import kegg.recuperation.Fichiers;
 //package kegg.gui;
 /**
  * PathwayBrowser  
@@ -28,7 +27,7 @@ public class PathwayBrowser extends JPanel {
 	private JLabel image_viewer;
 	
 	private String species; // nom de l'espece entree dans le champs species
-	private String id;      // nom de l'identifiant entree dans le champs id
+	private String map_id;      // nom de l'identifiant entree dans le champs id
 	
 	private final int OFFSET = 5;
 	
@@ -79,15 +78,11 @@ public class PathwayBrowser extends JPanel {
 	    	@Override
 	    	public void actionPerformed(ActionEvent clic) {
 	    		species = text_species.getText().trim();
-        		id = text_ID.getText().trim();
-	        	if (species != "" && id != "") {
-	        		System.out.println("Species: " + species + " ; MAP_ID: " + id); // TEST
-	        		try {
-						afficherContenu(species, id);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+        		map_id = text_ID.getText().trim();
+	        	if (species != "" && map_id != "") {
+	        		System.out.println("Species: " + species + " ; MAP_ID: " + map_id); // TEST
+//	        			Fichiers.getP(species, map_id);
+						afficherContenu(species, map_id);
 	        	}
 	    	}	
         }); 
@@ -104,18 +99,24 @@ public class PathwayBrowser extends JPanel {
 	    add(menu, BorderLayout.NORTH);
     }
     
-//    public void afficherContenu(/*URL url*/String species, String id) throws IOException {
-//    	
-//    }
-	public void afficherContenu(String species, String id) throws IOException {
-		String map = species + id;
-		String image = "http://rest.kegg.jp/get/" + map + "/image";
+	public void afficherContenu(String species, String id) {
+		File image_path;
 		try {
-			URL image_url = new URL(image);
-			image_viewer.setIcon((Icon)(new ImageIcon(image_url)));
-		} catch (MalformedURLException mue) {
-			mue.printStackTrace();
+			image_path = Fichiers.getPathwayFiles(species, id);
+			image_viewer.setIcon((Icon)(new ImageIcon(image_path.getPath())));
+		} catch (IOException ioe) {
+			System.err.println("IOException: " + ioe.getMessage());
 		}
+		
+		
+//		String map = species + id;
+//		String image = "http://rest.kegg.jp/get/" + map + "/image";
+//		try {
+//			URL image_url = new URL(image);
+//			image_viewer.setIcon((Icon)(new ImageIcon(image_url)));
+//		} catch (MalformedURLException mue) {
+//			mue.printStackTrace();
+//		}
 		
 	    
 //	    selection = null;
@@ -139,7 +140,7 @@ public class PathwayBrowser extends JPanel {
     }
     
     public String getID() {
-    	return id;
+    	return map_id;
     }
     
     public void setSpecies(String species) {
@@ -147,6 +148,6 @@ public class PathwayBrowser extends JPanel {
     }
     
     public void setID(String id) {
-    	 this.id = id;
+    	 this.map_id = id;
     }
 }

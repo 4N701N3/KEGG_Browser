@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import kegg.recuperation.Fichiers;
+
 /** 
  *  Classe qui permet l'afficahge graphique du logiciel.
  * 
@@ -25,13 +27,14 @@ public class Fenetre extends JFrame {
         
         Container conteneur = getContentPane();
         conteneur.add(main_container);
-        
+
     }
     
 	/**
 	 * @param args
 	 */
     public static void main(String[] arg) throws IOException {
+    	Fichiers.setWorkingDirectory();
     	SwingUtilities.invokeLater(new Runnable() {
 	    	public void run() {
 	    		try {

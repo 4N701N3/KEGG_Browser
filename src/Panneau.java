@@ -16,14 +16,14 @@ public class Panneau extends JPanel {
 	private JPanel gene_part_right;
 	private GenomeBrowser genome_browser;
 //	public GenomeMenu menu_genome; // menu
-	private Information gene_info;
+	private InfoGenome gene_info;
 	
 	private JPanel path_part; // bottom half
 	private JPanel path_part_left;
 	private JPanel path_part_right;
 	private PathwayBrowser pathway_browser;
 //	protected Menu menu_pathway; // menu
-	private Information react_info;
+	private InfoPathway react_info;
 	
 	
 	// Initialisation des Layout 
@@ -43,7 +43,7 @@ public class Panneau extends JPanel {
 	    
 	    gene_part_left = new JPanel();
 	    gene_part_right = new JPanel();
-	    gene_part_right.setPreferredSize(new Dimension(200, 240));
+	    gene_part_right.setPreferredSize(new Dimension(300, 240));
 	    gene_part_left.setLayout(new BorderLayout());
 	    gene_part_right.setLayout(new BorderLayout());
 	    
@@ -58,7 +58,7 @@ public class Panneau extends JPanel {
 	    genome_browser = new GenomeBrowser("Genome browser", "Gene ID");
 	    gene_part_left.add(genome_browser, BorderLayout.CENTER);
 	    
-	    gene_info = new Information("Gene Information", "Involved in reaction(s)");
+	    gene_info = new InfoGenome("Gene Information", "Involved in reaction(s)");
 	    gene_part_right.add(gene_info, BorderLayout.CENTER);
 
 	    System.out.println("Test 2");
@@ -69,7 +69,7 @@ public class Panneau extends JPanel {
 	    
 	    path_part_left = new JPanel();
 	    path_part_right = new JPanel();
-	    path_part_right.setPreferredSize(new Dimension(200, 240));
+	    path_part_right.setPreferredSize(new Dimension(300, 240));
 	    path_part_left.setLayout(new BorderLayout());
 	    path_part_right.setLayout(new BorderLayout());
 	    
@@ -84,7 +84,7 @@ public class Panneau extends JPanel {
 //	    menu_pathway = new PathwayBrowser("Pathway browser", "Map ID");
 //	    path_part_left.add(menu_pathway, BorderLayout.NORTH);
 	    
-	    react_info = new Information("Reaction Information", "Involves gene(s)");
+	    react_info = new InfoPathway("Reaction Information", "Involves gene(s)");
 	    path_part_right.add(react_info, BorderLayout.CENTER);
 	    
 	    System.out.println("Test 3");

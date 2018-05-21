@@ -9,11 +9,14 @@ import java.net.URL;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
+import org.fit.cssbox.swingbox.BrowserPane;
+
+import kegg.recuperation.Fichiers;
 
 //package kegg.gui;
 /**
@@ -23,10 +26,10 @@ public class GenomeBrowser extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-	private JEditorPane html_viewer;
+	private BrowserPane html_viewer;
 	
 	private String species; // nom de l'espece entree dans le champs species
-	private String id;      // nom de l'identifiant entree dans le champs id
+	private String gene_id;      // nom de l'identifiant entree dans le champs id
 	
 	private final int OFFSET = 5;
 	
@@ -76,13 +79,13 @@ public class GenomeBrowser extends JPanel {
 	    	public void actionPerformed(ActionEvent clic) {
 	        	if (text_species.getText() != "" && text_ID.getText() != "") {
 	        		species = text_species.getText().trim();
-	        		id = text_ID.getText().trim();
-	        		System.out.println("Species: " + species + " ; ID: " + id); // TEST
+	        		gene_id = text_ID.getText().trim();
+	        		System.out.println("Species: " + species + " ; ID: " + gene_id); // TEST
 	        		try {
-						afficherContenu(species, id);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						afficherContenu(species, gene_id);
+						InfoGenome.setInfo(Fichiers.getGenomeFiles(species, gene_id));
+					} catch (IOException ioe) {
+						System.err.println("IOException: " + ioe.getMessage());
 					}
 	        	}
 	    	}	
@@ -94,9 +97,9 @@ public class GenomeBrowser extends JPanel {
         menu.setBorder(BorderFactory.createEmptyBorder(0,0,OFFSET,0)); // Marge du menu : top, left, bottom, right
     	// fin Menu
         
-        
-        html_viewer = new JEditorPane(); // Contenu html
-        html_viewer.setEditable(false);  // Contenu non modifiable par l'utilisateur
+        html_viewer = new BrowserPane();
+//        html_viewer = new JEditorPane(); // Contenu html
+//        html_viewer.setEditable(false);  // Contenu non modifiable par l'utilisateur
 //        html_viewer.addHyperlinkListener(new Hyperactive());
         
         // Ajout au browser
@@ -117,11 +120,19 @@ public class GenomeBrowser extends JPanel {
 //		}
     }
     
-    public void afficherContenu(/*URL url*/String species, String id) throws IOException {
+//	public void afficherContenu(String species, String id) {
+//		File html_path;
+//		try {
+//			html_path = Fichiers.getHtml(species, id);
+//			html_viewer.loadStyleSheet(new URL("http://www.kegg.jp/css/kegg2.css"), "/css/kegg2.css", "utf-8");
+//			html_viewer.setPage(html_path.toURI().toURL());
+//		} catch (IOException ioe) {
+//			System.err.println("IOException afficherContenu: " + ioe.getMessage());
+//		}
+    public void afficherContenu(String species, String id) throws IOException {
     	try {
     		URL url = new URL("http://www.kegg.jp/kegg-bin/show_genomemap?ORG=" + species + "&ACCESSION=" + id);// "&CHR=c&START_POS=660001");
 //	    	URL url = new URL("http://www.kegg.jp/kegg-bin/show_genomemap?ORG=" + menu.getSpecies() + "&ACCESSION=" + menu.getID());// "&CHR=c&START_POS=660001");
-//	    	URL url = new URL("http://www.kegg.jp/kegg-bin/show_genomemap?ORG=eco&CHR=c&START_POS=660001");
 //			afficherContenu(html_viewer, url); 
 	    	html_viewer.setPage(url);
 		} 
@@ -129,7 +140,7 @@ public class GenomeBrowser extends JPanel {
 			e.printStackTrace();
 		} 
 	    catch (IOException ioe) {
-			ioe.printStackTrace();
+	    	System.err.println("IOException afficherContenu: " + ioe.getMessage());
 		}
        
     }
@@ -146,7 +157,7 @@ public class GenomeBrowser extends JPanel {
     }
     
     public String getID() {
-    	return id;
+    	return gene_id;
     }
     
     public void setSpecies(String species) {
@@ -154,6 +165,6 @@ public class GenomeBrowser extends JPanel {
     }
     
     public void setID(String id) {
-    	 this.id = id;
+    	 this.gene_id = id;
     }
 }
