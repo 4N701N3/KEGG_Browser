@@ -14,28 +14,19 @@ public class Panneau extends JPanel {
 	private JPanel gene_part; // top half
 	private JPanel gene_part_left;
 	private JPanel gene_part_right;
-	private GenomeBrowser genome_browser;
+	private BrowserGenome genome_browser;
 //	public GenomeMenu menu_genome; // menu
 	private InfoGenome gene_info;
 	
 	private JPanel path_part; // bottom half
 	private JPanel path_part_left;
 	private JPanel path_part_right;
-	private PathwayBrowser pathway_browser;
+	private BrowserPathway pathway_browser;
 //	protected Menu menu_pathway; // menu
 	private InfoPathway react_info;
-	
-	
-	// Initialisation des Layout 
-//    private static BorderLayout gene_part_bl;
-//    private static BorderLayout gb_bl;
     
     public Panneau() {
-//    	GridLayout gl = new GridLayout(2,1);
-//	    setLayout(gl);
 		setLayout(new GridLayout(2,1));
-	    
-	    System.out.println("Test 1");
 	    
 	    // =======  Definition de la partie Genome browser (moitie haute) ==========
 	    gene_part = new JPanel();
@@ -55,13 +46,12 @@ public class Panneau extends JPanel {
 //	    menu_genome = new GenomeMenu("Genome browser", "Gene ID");
 //	    gene_part_left.add(menu_genome, BorderLayout.NORTH);
 	    
-	    genome_browser = new GenomeBrowser("Genome browser", "Gene ID");
+	    genome_browser = new BrowserGenome("Genome browser", "Gene ID");
 	    gene_part_left.add(genome_browser, BorderLayout.CENTER);
 	    
 	    gene_info = new InfoGenome("Gene Information", "Involved in reaction(s)");
 	    gene_part_right.add(gene_info, BorderLayout.CENTER);
-
-	    System.out.println("Test 2");
+	    
 	    
 	    //==================== Pathway browser part (bottom half) ==================
 	    path_part = new JPanel();
@@ -78,7 +68,7 @@ public class Panneau extends JPanel {
 	    path_part.add(path_part_right, BorderLayout.EAST);
 	    path_part.setBorder(BorderFactory.createEmptyBorder(0,OFFSET,OFFSET,OFFSET)); // top, left, bottom, right
 	    
-	    pathway_browser = new PathwayBrowser("Pathway browser", "Map ID");
+	    pathway_browser = new BrowserPathway("Pathway browser", "Map ID");
 	    path_part_left.add(pathway_browser, BorderLayout.CENTER);
 	    
 //	    menu_pathway = new PathwayBrowser("Pathway browser", "Map ID");
@@ -86,8 +76,6 @@ public class Panneau extends JPanel {
 	    
 	    react_info = new InfoPathway("Reaction Information", "Involves gene(s)");
 	    path_part_right.add(react_info, BorderLayout.CENTER);
-	    
-	    System.out.println("Test 3");
     }
     
     
